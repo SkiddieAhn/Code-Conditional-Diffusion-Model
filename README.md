@@ -24,6 +24,8 @@ Most codes were obtained from the following GitHub page: [[Link]](https://github
 ```Shell
 # default option for training
 python train.py
+# unconditional training
+python train.py --condition=False
 # don't use wandb
 python train.py --wandb=False
 # change 'epoch_size'.
@@ -39,9 +41,11 @@ python train.py --resume=cifar10_1000
 - When generation is completed, the **video** is automatically saved in the ```contents``` directory.
 ```Shell
 # recommended option for testing
-python --trained_model=cifar10_1000 --ddim_sampling=False --cfg_w=2.0
+python test.py --trained_model=cifar10_1000 --ddim_sampling=False --cfg_w=2.0
+# unconditional testing
+python test.py --condition=False
 # save images per timestep
-python --trained_model=cifar10_1000 --ddim_sampling=True --save_images=True
+python test.py --trained_model=cifar10_1000 --ddim_sampling=True --save_images=True
 ```
 
 ## Dataset & Model

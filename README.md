@@ -43,7 +43,7 @@ python train.py --resume=cifar10_1000
 # recommended option for testing
 python test.py --trained_model=cifar10_1000 --ddim_sampling=False --cfg_w=2.0
 # unconditional testing
-python test.py --condition=False
+python test.py --trained_model=cifar10_1000 --condition=False
 # save images per timestep
 python test.py --trained_model=cifar10_1000 --ddim_sampling=True --save_images=True
 ```

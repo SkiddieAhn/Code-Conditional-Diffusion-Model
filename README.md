@@ -1,10 +1,22 @@
-# Conditional DM with CFG
+# Conditional Diffusion Model
 Conditional DDPM/DDIM with Classifier Free Guidance.  
 Most codes were obtained from the following GitHub page: [[Link]](https://github.com/tcapelle/Diffusion-Models-pytorch)
 
-### Classifier Free Guidance [CFG]
-![image](https://github.com/SkiddieAhn/Study-Diffusion-Model/assets/52392658/5a803333-95f1-4e6c-b29d-6e504c96f19e)
-![image](https://github.com/SkiddieAhn/Study-Diffusion-Model/assets/52392658/093398ab-d90f-4951-802b-81a611638998)
+### 1. Denoising Diffusion Probabilistic Models [DDPM]
+**Paper**: ```NIPS, 2020``` Denoising Diffusion Probabilistic Models [[Link](https://arxiv.org/pdf/2006.11239.pdf)]  
+<img width="900" alt="1-1" src="https://github.com/SkiddieAhn/Study-Diffusion-Model/assets/52392658/beebfccf-6bb2-401b-abfa-a2598d9ec2ea">
+<img width="900" alt="1-2" src="https://github.com/SkiddieAhn/Study-Diffusion-Model/assets/52392658/55f08dbb-49df-4c27-a0d4-ad0e94b86b85">
+
+### 2. Denoising Diffusion Implicit Models [DDIM]
+**Paper**: ```ICLR, 2021``` DENOISING DIFFUSION IMPLICIT MODELS [[Link](https://arxiv.org/pdf/2010.02502.pdf)]  
+![image](https://github.com/SkiddieAhn/Study-Diffusion-Model/assets/52392658/27c066ed-1756-4a90-87d1-38a8c5e76516)
+<img width="900" alt="2-2" src="https://github.com/SkiddieAhn/Study-Diffusion-Model/assets/52392658/b060fce0-f6a6-48df-9d60-89ba2860717b">
+
+### 3. Classifier Free Guidance [CFG]
+**Paper**: ```NIPSW, 2021``` CLASSIFIER-FREE DIFFUSION GUIDANCE [[Link](https://arxiv.org/pdf/2207.12598.pdf)]  
+  
+<img width="900" alt="3-1" src="https://github.com/SkiddieAhn/Study-Diffusion-Model/assets/52392658/5a803333-95f1-4e6c-b29d-6e504c96f19e">
+<img width="900" alt="3-2" src="https://github.com/SkiddieAhn/Study-Diffusion-Model/assets/52392658/093398ab-d90f-4951-802b-81a611638998">
 
 ## Training
 - Before training, log in to ```wandb``` on your PC.

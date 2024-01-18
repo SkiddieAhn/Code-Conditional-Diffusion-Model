@@ -41,11 +41,11 @@ python train.py --resume=cifar10_1000
 - When generation is completed, the **video** is automatically saved in the ```contents``` directory.
 ```Shell
 # recommended option for testing
-python test.py --trained_model=cifar10_1000 --ddim_sampling=False --cfg_w=2.0
+python test.py --trained_model=cifar10_2000 --ddim_sampling=False --cfg_w=2.0
 # unconditional testing
-python test.py --trained_model=cifar10_1000 --condition=False
+python test.py --trained_model=cifar10_2000 --condition=False
 # save images per timestep
-python test.py --trained_model=cifar10_1000 --ddim_sampling=True --save_images=True
+python test.py --trained_model=cifar10_2000 --save_images=True
 ```
 
 ## Dataset & Model
@@ -55,7 +55,7 @@ python test.py --trained_model=cifar10_1000 --ddim_sampling=True --save_images=T
   
 |   CIFAR10-64     | Model  |
 |:--------------:|:-----------:|
-|[kaggle](https://www.kaggle.com/datasets/joaopauloschuler/cifar10-64x64-resized-via-cai-super-resolution)|[Google Drive](https://drive.google.com/file/d/15_JKss-bW9m6ihwEYaIU_DMSFNlDXKZV/view?usp=sharing)|
+|[kaggle](https://www.kaggle.com/datasets/joaopauloschuler/cifar10-64x64-resized-via-cai-super-resolution)|[Google Drive](https://drive.google.com/file/d/1DtRLa_zu5fU2Tj6X9FTDiv0FxEWSxopc/view?usp=drive_link)|
 
 ```Shell
 # diffusion model config

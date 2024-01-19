@@ -29,11 +29,11 @@ python train.py --condition=False
 # don't use wandb
 python train.py --wandb=False
 # change 'epoch_size'.
-python train.py --epoch_size=1000
+python train.py --epoch_size=2000
 # change 'batch size'.
 python train.py --batch_size=128
 # Continue training with latest model
-python train.py --resume=cifar10_1000
+python train.py --resume=cifar10_2000
 ```
 
 ## Testing
@@ -71,7 +71,7 @@ share_config['cfg_w'] = 0.1
 
 # train config
 share_config['batch_size'] = 128
-share_config['epoch_size'] = 1000
+share_config['epoch_size'] = 2000
 share_config['lr'] = 1e-4
 share_config['ema'] = True
 ```

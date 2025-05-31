@@ -55,7 +55,7 @@ python test.py --trained_model=cifar10_2000 --save_images=True
   
 |   CIFAR10-64     | Model  |
 |:--------------:|:-----------:|
-|[kaggle](https://www.kaggle.com/datasets/joaopauloschuler/cifar10-64x64-resized-via-cai-super-resolution)|[Google Drive](https://drive.google.com/file/d/1DtRLa_zu5fU2Tj6X9FTDiv0FxEWSxopc/view?usp=drive_link)|
+|[kaggle](https://www.kaggle.com/datasets/joaopauloschuler/cifar10-64x64-resized-via-cai-super-resolution)|[Google Drive](https://drive.google.com/file/d/1I7jsk2FJvozNMe_hSR_mqIBp8FB7o1BN/view?usp=sharing)|
 
 ```Shell
 # diffusion model config

@@ -1,4 +1,6 @@
 import torch 
+import numpy as np
+from torch.amp import autocast
 from training.train_ing_func import make_models_dict, update_best_model, save_image
 from fastprogress import progress_bar
 import wandb
@@ -67,9 +69,11 @@ class Training():
             one_minus_sqrt_alpha_bar = self.sqrt_one_minus_alpha_bar_list[t[i]]
             noise_img[i] = sqrt_alpha_bar * inputs[i] + one_minus_sqrt_alpha_bar * esp[i]
 
-        # reverse process 
-        output = self.model(noise_img, t, c)
-        loss = self.loss(output, esp)
+        # reverse process
+        with autocast(self.device.type):
+            output = self.model(noise_img, t, c)
+            loss = self.loss(output, esp)
+
         return loss
 
 
@@ -92,6 +96,7 @@ class Training():
                 c = None
 
             # get loss
+            self.opt.zero_grad()
             loss = self.one_forward(inputs, data_size, t, c)
             pbar.comment = f"MSE={loss.item():2.3f}" 
             if self.wandb:
@@ -99,7 +104,6 @@ class Training():
                             "learning_rate": self.sch.get_last_lr()[0]})
 
             # optimization
-            self.opt.zero_grad()
             self.scaler.scale(loss).backward()
             self.scaler.step(self.opt)
             self.scaler.update()
@@ -121,22 +125,23 @@ class Training():
 
     def one_val(self, val_running_loss):
         self.model.eval()
-        for data in progress_bar(self.val_loader, total=len(self.val_loader)):
-            inputs, labels = data
-            inputs = inputs.to(self.device)
-            labels = labels.to(self.device)
-            data_size = len(inputs)
+        with torch.no_grad():
+            for data in progress_bar(self.val_loader, total=len(self.val_loader)):
+                inputs, labels = data
+                inputs = inputs.to(self.device)
+                labels = labels.to(self.device)
+                data_size = len(inputs)
 
-            # get time, condition
-            t = torch.randint(0, self.timestep_num, size=(data_size,), device=inputs.device).long()
-            if self.condition:
-                c = labels
-            else:
-                c = None
+                # get time, condition
+                t = torch.randint(0, self.timestep_num, size=(data_size,), device=inputs.device).long()
+                if self.condition:
+                    c = labels
+                else:
+                    c = None
 
-            # get loss
-            loss = self.one_forward(inputs, data_size, t, c)
-            val_running_loss += loss.item()
+                # get loss
+                loss = self.one_forward(inputs, data_size, t, c)
+                val_running_loss += loss.item()
 
         avg_loss = np.round(val_running_loss / len(self.val_loader), 4)
         if self.wandb:

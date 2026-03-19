@@ -1,0 +1,14 @@
+# Environments
+.venv/
+__pycache__/
+*.pyc
+
+# Data (Ignore content but keep directory)
+data/*
+!data/.gitkeep
+
+# Weights and Outputs
+weights/
+contents/
+!weights/.gitkeep
+!contents/.gitkeep

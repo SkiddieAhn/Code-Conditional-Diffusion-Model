@@ -18,6 +18,19 @@ Most codes were obtained from the following GitHub page: [[Link]](https://github
 <img width="900" alt="3-1" src="https://github.com/SkiddieAhn/Study-Diffusion-Model/assets/52392658/5a803333-95f1-4e6c-b29d-6e504c96f19e">
 <img width="900" alt="3-2" src="https://github.com/SkiddieAhn/Study-Diffusion-Model/assets/52392658/093398ab-d90f-4951-802b-81a611638998">
 
+## Installation
+```Shell
+# Create virtual environment (optional but recommended)
+uv venv
+source .venv/bin/activate
+
+# Install dependencies
+uv pip install -r requirements.txt
+
+# Download dataset
+python download_data.py
+```
+
 ## Training
 - Before training, log in to ```wandb``` on your PC.
 - Please check ```train.py``` and ```config.py``` files and train the model.

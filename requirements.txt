@@ -1,0 +1,12 @@
+torch
+torchvision
+numpy
+kagglehub
+wandb
+tqdm
+matplotlib
+pillow
+fastprogress
+opencv-python-headless
+ipython
+fastcore

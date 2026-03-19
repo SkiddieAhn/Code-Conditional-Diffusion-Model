@@ -44,7 +44,27 @@ def Test(cfg):
             model = UNet_conditional(c_in=in_channel, c_out=in_channel, time_dim=time_dim, 
                                             num_classes=num_classes, deep_conv=deep_conv, device=device).to(device)
             
-        model.load_state_dict(torch.load(cfg.trained_model)['model'])
+        state_dict = torch.load(cfg.trained_model)['model']
+        if gpu_count > 1:
+            # Add 'module.' prefix if missing for MultiGPU model
+            new_state_dict = {}
+            for k, v in state_dict.items():
+                if not k.startswith('module.'):
+                    new_state_dict['module.' + k] = v
+                else:
+                    new_state_dict[k] = v
+            state_dict = new_state_dict
+        else:
+            # Strip 'module.' prefix if present for single-GPU model
+            new_state_dict = {}
+            for k, v in state_dict.items():
+                if k.startswith('module.'):
+                    new_state_dict[k[7:]] = v
+                else:
+                    new_state_dict[k] = v
+            state_dict = new_state_dict
+
+        model.load_state_dict(state_dict)
         model.eval()
 
         if cfg.ddim_sampling:

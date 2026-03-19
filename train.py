@@ -56,7 +56,7 @@ def main():
     opt, sch, scaler = def_optim_sch_scaler(train_cfg, train_loader, model)
 
     # load models
-    cur_epoch, min_loss = load_model(train_cfg, model, opt)
+    cur_epoch, min_loss = load_model(train_cfg, model, opt, sch, scaler, ema_model)
 
     '''
     <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

@@ -170,11 +170,11 @@ class Training():
             print(f"Epoch {epoch+1}/{self.end_epoch}, Valid Loss: {val_avg_loss}")
 
             # early stopping
-            self.min_loss = update_best_model(self.dataset_name, self.model, self.opt, epoch, val_avg_loss, self.min_loss)
+            self.min_loss = update_best_model(self.dataset_name, self.model, self.opt, self.sch, self.scaler, self.ema_model, epoch, val_avg_loss, self.min_loss)
 
             # save model
             if (epoch+1) % self.save_interval == 0:
-                model_dict = make_models_dict(self.model, self.opt, epoch, self.min_loss)
+                model_dict = make_models_dict(self.model, self.opt, self.sch, self.scaler, self.ema_model, epoch, self.min_loss)
                 save_path = f'weights/{self.dataset_name}_{epoch+1}.pth'
                 torch.save(model_dict, save_path)
                 print('<< model save at [%d] epoch! >>' % (epoch+1))

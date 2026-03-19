@@ -65,12 +65,20 @@ def def_optim_sch_scaler(cfg, dataloader, model):
     return opt, sch, scaler
 
 
-def load_model(cfg, model, opt):
+def load_model(cfg, model, opt, sch, scaler, ema_model):
     if cfg.resume:
-        cur_epoch = torch.load(cfg.resume)['epoch']
-        min_loss = torch.load(cfg.resume)['min_loss']
-        model.load_state_dict(torch.load(cfg.resume)['model'])
-        opt.load_state_dict(torch.load(cfg.resume)['optimizer'])
+        checkpoint = torch.load(cfg.resume)
+        cur_epoch = checkpoint['epoch']
+        min_loss = checkpoint['min_loss']
+        model.load_state_dict(checkpoint['model'])
+        opt.load_state_dict(checkpoint['optimizer'])
+        
+        if 'scheduler' in checkpoint:
+            sch.load_state_dict(checkpoint['scheduler'])
+        if 'scaler' in checkpoint:
+            scaler.load_state_dict(checkpoint['scaler'])
+        if ema_model is not None and 'ema_model' in checkpoint:
+            ema_model.load_state_dict(checkpoint['ema_model'])
 
         print('\n===========================================================')
         print(f'Load Model Ok!')

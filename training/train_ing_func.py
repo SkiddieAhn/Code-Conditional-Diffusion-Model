@@ -3,16 +3,24 @@ import wandb
 from diffusion import * 
 import cv2
 
-def make_models_dict(model, opt, epoch, min_loss):
-    model_dict = {'model': model.state_dict(), 'optimizer': opt.state_dict(),
-                  'epoch': int(epoch), 'min_loss': float(min_loss)}
+def make_models_dict(model, opt, sch, scaler, ema_model, epoch, min_loss):
+    model_dict = {
+        'model': model.state_dict(), 
+        'optimizer': opt.state_dict(),
+        'scheduler': sch.state_dict(),
+        'scaler': scaler.state_dict(),
+        'epoch': int(epoch), 
+        'min_loss': float(min_loss)
+    }
+    if ema_model is not None:
+        model_dict['ema_model'] = ema_model.state_dict()
     return model_dict
 
 
-def update_best_model(dataset_name, model, opt, epoch, loss, min_loss):
+def update_best_model(dataset_name, model, opt, sch, scaler, ema_model, epoch, loss, min_loss):
     if loss < min_loss:
         min_loss = loss
-        model_dict = make_models_dict(model, opt, epoch, min_loss)
+        model_dict = make_models_dict(model, opt, sch, scaler, ema_model, epoch, min_loss)
         save_path = f'weights/{dataset_name}_best.pth'
         torch.save(model_dict, save_path)
         print('<<< Best model save at [%d] epoch! >>>' % (epoch+1))
